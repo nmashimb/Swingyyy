@@ -1,7 +1,12 @@
 package com.swingy.app;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JTextArea;
 import java.util.Scanner;
 
 /**
@@ -24,21 +29,48 @@ import java.util.Scanner;
 
 public class App
 {
-    JFrame window;
-    Container cont;
+    JFrame window; 
+    JPanel maintextPanel,optionPanel;
+    JButton optionOneButton,optionTwoButton;
+    JTextArea textArea;
+    Container con;
 
-    public App(){
-        window = new JFrame();
-        window.setSize(500, 500);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //adds close option on window layout
-        window.getContentPane().setBackground(Color.black);
-        window.setLayout(null); //making default layout null so we can make our own
-        window.setVisible(true); //makes the window we created appear
-        con.window.getContentPane()
+    public App(){}
+
+    public void createGameScreen() //change name
+    { 
+        JFrame window = new JFrame("SWINGY");
+
+        JTextArea textArea = new JTextArea("1. Create a hero\n2. Select a previously created hero.");  
+        textArea.setBounds(50,10, 290,250);
+        textArea.setEditable(false);
+        textArea.setLineWrap(true);
+        window.add(textArea);
+
+        JButton optionOne = new JButton("1");
+        JButton optionTwo = new JButton("2");
+        optionOne.setBounds(130, 300, 100, 30);
+        optionTwo.setBounds(130, 350, 100, 30);
+
+        optionOne.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                System.out.println("option two selected");
+            }
+        });
+        optionTwo.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                System.out.println("option one selected");
+            }
+        });
+
+        window.add(optionOne);window.add(optionTwo);
+        window.setSize(400, 400);
+        window.setLayout(null);
+        window.setVisible(true);
     }
 
     public static void main( String[] args )
-    {
+    { 
         Scanner in = new Scanner(System.in);
         String numInput;
         int num = 0;
@@ -60,8 +92,9 @@ public class App
             System.out.println("You entered: "+num);
         }
         else if (args[0].matches("gui")){
-            new App();
-            System.out.println("gui ");
+            System.out.println("gui option");
+            App game = new App();
+            game.createGameScreen();
         }
         else{
             return;

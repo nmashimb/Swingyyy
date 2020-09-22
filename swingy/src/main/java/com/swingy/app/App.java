@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import java.util.Scanner;
-
+import com.swingy.app.controllers.*;
+import com.swingy.app.views.*;
+import com.swingy.app.models.*;
 /**
  * Hello world!
  *
@@ -75,7 +77,15 @@ public class App
         String numInput;
         int num = 0;
         boolean valid = false;
-        if (args[0].matches("console")){
+
+        //////////
+        if (args[0].matches("test")){
+            CalculatorView theView = new CalculatorView();
+            CalcultorModel theModel = new CalculatorModel();
+            CalculatorController theController = new CalculatorController(theView, theModel);
+            theView.setVisible(true);
+        }
+        else if (args[0].matches("console")){
             System.out.println("WELCOME TO SWINGY\n");
             while (valid == false){
                 System.out.println("1. Create new hero");

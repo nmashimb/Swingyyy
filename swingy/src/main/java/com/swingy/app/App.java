@@ -81,7 +81,7 @@ public class App
         //////////
         if (args[0].matches("test")){
             CalculatorView theView = new CalculatorView();
-            CalcultorModel theModel = new CalculatorModel();
+            CalculatorModel theModel = new CalculatorModel();
             CalculatorController theController = new CalculatorController(theView, theModel);
             theView.setVisible(true);
         }

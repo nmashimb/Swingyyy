@@ -3,10 +3,10 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class CalculatorView extends JFrame {
-    private JTextField firstNumber = new JtextField(10); //10 wide
+    private JTextField firstNumber = new JTextField(10); //10 wide
     private JLabel additionLabel = new JLabel("+");
-    private JTextField secondNumber = new JtextField(10);
-    private JButton CalculationButton = new JButton("Calculate");
+    private JTextField secondNumber = new JTextField(10);
+    private JButton calculateButton = new JButton("Calculate");
     private JTextField calcSolution = new JTextField(10);
 
     CalculatorView(){
@@ -17,7 +17,7 @@ public class CalculatorView extends JFrame {
         calcPanel.add(firstNumber);
         calcPanel.add(additionLabel);
         calcPanel.add(secondNumber);
-        calcPanel.add(CalculationButton);
+        calcPanel.add(calculateButton);
         calcPanel.add(calcSolution);
 
         this.add(calcPanel); //this == JFrame
@@ -35,11 +35,11 @@ public class CalculatorView extends JFrame {
         return Integer.parseInt(calcSolution.getText());
     }
 
-    public void setValueSolution(int solution){
+    public void setCalcSolution(int solution){
         calcSolution.setText(Integer.toString(solution));
     }
 
-    void addCalculationListener(ActionListener listenerForCalcButton){
-        CalculationButton.addActionListener(listenerForCalcButton);
+    public void addCalculateListener(ActionListener listenForCalcButton){
+        calculateButton.addActionListener(listenForCalcButton);
     }
 }

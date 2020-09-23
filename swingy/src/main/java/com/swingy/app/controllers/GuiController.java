@@ -11,13 +11,21 @@ public class GuiController
     public GuiController(GuiView guiView){
         this.guiView = guiView;
 
-        this.guiView.addOptionOneListener(new StartButtonListener());
-        //this.guiView.addOptionTwoListener(new StartButtonListener());
+        this.guiView.addOptionOneListener(new CreateHeroButtonListener());
+        this.guiView.addOptionTwoListener(new SelectHeroButtonListener());
     }
 
-    class StartButtonListener implements ActionListener {
+    class CreateHeroButtonListener implements ActionListener 
+    {
         public void actionPerformed(ActionEvent e){
-            System.out.println("worked");
+            System.out.println("one worked");
+        }
+    }
+
+      class SelectHeroButtonListener implements ActionListener 
+    {
+        public void actionPerformed(ActionEvent e){
+            System.out.println("two worked");
         }
     }
 }

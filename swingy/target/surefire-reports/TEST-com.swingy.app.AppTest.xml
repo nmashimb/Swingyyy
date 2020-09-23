@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.swingy.app.AppTest" time="0.029" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.swingy.app.AppTest" time="0.03" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="14"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="ZA"/>
     <property name="sun.boot.library.path" value="/goinfre/nmashimb/.brew/Cellar/openjdk/14.0.1/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/goinfre/nmashimb/Desktop/Swingy/swingy/target/surefire/surefirebooter18019696352977114226.jar /goinfre/nmashimb/Desktop/Swingy/swingy/target/surefire 2020-09-23T16-01-55_073-jvmRun1 surefire17846564595254761392tmp surefire_013890533389026106726tmp"/>
+    <property name="sun.java.command" value="/goinfre/nmashimb/Desktop/Swingy/swingy/target/surefire/surefirebooter10449421460588782426.jar /goinfre/nmashimb/Desktop/Swingy/swingy/target/surefire 2020-09-23T16-05-23_292-jvmRun1 surefire9617591932596077354tmp surefire_010346891726357765439tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/goinfre/nmashimb/Desktop/Swingy/swingy/target/test-classes:/goinfre/nmashimb/Desktop/Swingy/swingy/target/classes:/goinfre/nmashimb/.m2/repository/junit/junit/4.11/junit-4.11.jar:/goinfre/nmashimb/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/goinfre/nmashimb/.m2/repository/org/hibernate/validator/hibernate-validator/6.1.5.Final/hibernate-validator-6.1.5.Final.jar:/goinfre/nmashimb/.m2/repository/jakarta/validation/jakarta.validation-api/2.0.2/jakarta.validation-api-2.0.2.jar:/goinfre/nmashimb/.m2/repository/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar:/goinfre/nmashimb/.m2/repository/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar:"/>
@@ -28,7 +28,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/goinfre/nmashimb/Desktop/Swingy/swingy/target/surefire/surefirebooter18019696352977114226.jar"/>
+    <property name="surefire.real.class.path" value="/goinfre/nmashimb/Desktop/Swingy/swingy/target/surefire/surefirebooter10449421460588782426.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="14.0.1+14"/>

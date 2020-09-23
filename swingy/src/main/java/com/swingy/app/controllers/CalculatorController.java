@@ -14,23 +14,27 @@ public class CalculatorController {
         this.theView = theView;
         this.theModel = theModel;
         //the the view, to execute action when button clicked
-        this.theView.addCalculateListener(new CalculateListener());
+
+       this.theView.addCalculateListener(new CalculateListener());
     }
+    
     //inner class
     //@Override
     class CalculateListener implements ActionListener{
-        public void actionPerfomed(ActionEvent arg0){
+        public void actionPerformed(ActionEvent e){
             int firstNumber, secondNumber = 0;
+
             try {
                 firstNumber = theView.getFirstNumber();
                 secondNumber = theView.getSecondNumber();
 
                 theModel.addTwoNumbers(firstNumber, secondNumber);
+                System.out.println(firstNumber+" : "+secondNumber+" = "+theModel.getCalculationValue());
                 theView.setCalcSolution(theModel.getCalculationValue());
             }
-            catch(NumberFormatException e){
+            catch(NumberFormatException ex){
                 System.out.println("error");
             }
         }
-    } 
+    }
 }

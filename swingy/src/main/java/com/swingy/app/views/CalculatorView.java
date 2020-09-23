@@ -9,7 +9,7 @@ public class CalculatorView extends JFrame {
     private JButton calculateButton = new JButton("Calculate");
     private JTextField calcSolution = new JTextField(10);
 
-    CalculatorView(){
+    public CalculatorView(){
         JPanel calcPanel = new JPanel();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(600, 200);
@@ -38,8 +38,8 @@ public class CalculatorView extends JFrame {
     public void setCalcSolution(int solution){
         calcSolution.setText(Integer.toString(solution));
     }
-
-    public void addCalculateListener(ActionListener listenForCalcButton){
+    
+   public void addCalculateListener(ActionListener listenForCalcButton){
         calculateButton.addActionListener(listenForCalcButton);
     }
 }

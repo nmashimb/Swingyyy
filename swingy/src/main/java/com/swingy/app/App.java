@@ -102,9 +102,9 @@ public class App
             System.out.println("You entered: "+num);
         }
         else if (args[0].matches("gui")){
-            System.out.println("gui option");
-            App game = new App();
-            game.createGameScreen();
+            System.out.println("gui optionnn");
+            GuiView gui = new GuiView();
+            GuiController guiController = new GuiController(gui);
         }
         else{
             return;

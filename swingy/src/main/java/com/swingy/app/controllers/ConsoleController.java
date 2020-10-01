@@ -4,7 +4,11 @@ import com.swingy.app.views.*;
 import com.swingy.app.models.*;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
@@ -16,6 +20,8 @@ public class ConsoleController
     private PrintWriter writer;
     private boolean validClass = false;
     private Scanner in = new Scanner(System.in);
+    private FileWriter myWriter;
+    private File filename;
 
     public ConsoleController(Player player, ConsoleView consoleView){
         this.consoleView = consoleView;
@@ -62,7 +68,7 @@ public class ConsoleController
             
         }
         player.playerCurrentStats();
-        saveNewPlayer();
+        saveNewPlayer(player.getPlayerClass());
         consoleView.printArgument("\nPRESS ANY KEY TO CONTINUE...\n");
         in.nextLine();
         ////SAVE PLAYER INFORMATION VIA TEXT
@@ -71,23 +77,85 @@ public class ConsoleController
 
     public void previosPlayers(){}
 
-    public void saveNewPlayer(){
+    public void saveNewPlayer(String playerClass){
         
         try{
-            File filename = new File("players.txt");
+            filename = new File("players.txt");
+            Scanner readPlayerText = new Scanner(filename);
+            if (readPlayerText.hasNextLine()) {
+                while (readPlayerText.hasNextLine()) {
+                    String data = readPlayerText.nextLine();
+                    String[] player = data.split(" ");
+                    System.out.println(player.length+" "+data);
+                    if (player[1].equals(playerClass)){
+                        break;
+                    }
+                }
+                //myWriter = new FileWriter(filename);
+                myWriter = new FileWriter(filename, true); 
+                BufferedWriter bw = new BufferedWriter(myWriter);
+                PrintWriter out = new PrintWriter(bw);
+                //myWriter.write(player.getPlayerName()+" "+player.getPlayerClass()+" "+player.getPlayerHP()+" "+player.getPlayerLevel()+" "+player.getPlayerExperiance()+" "+player.getPlayerAttack()+" "+player.getPlayerDefense()); //add weapon,armor
+                out.println(player.getPlayerName()+" "+player.getPlayerClass()+" "+player.getPlayerHP()+" "+player.getPlayerLevel()+" "+player.getPlayerExperiance()+" "+player.getPlayerAttack()+" "+player.getPlayerDefense());
+                myWriter.close();
+                readPlayerText.close();
+            }
+            else {
+                try {
+                    myWriter = new FileWriter(filename);
+                    myWriter.write(player.getPlayerName()+" "+player.getPlayerClass()+" "+player.getPlayerHP()+" "+player.getPlayerLevel()+" "+player.getPlayerExperiance()+" "+player.getPlayerAttack()+" "+player.getPlayerDefense()); //add weapon,armor
+                    myWriter.close();
+                    readPlayerText.close();
+                }
+                catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+            
+            
+            
+            
+            /*filename = new File("players.txt");
             if (filename.createNewFile()){
                 System.out.println("file created!");
             }
             else
-                System.out.println("file already created!");
-            writer = new PrintWriter(filename);
-            //writer.println(""+player.getPlayerName()+" "+player.getPlayerClass() +" "+ player.getPlayerLevel() +" "+player.getPlayerHP()+" "+ player.getPlayerExperiance()+"");
-            writer.print("x");
+                System.out.println("file already created!");*/
+
+            /*try {
+                //myWriter = new FileWriter("players.txt");
+                try {
+                    Scanner readPlayerText = new Scanner(filename);
+                    System.out.println("readPlayerText.nextLine() "+readPlayerText.hasNextLine());
+                    if (readPlayerText.hasNextLine()){
+                        while (readPlayerText.hasNextLine()) {
+                            System.out.println(readPlayerText.nextLine());
+                            String data = readPlayerText.nextLine();
+                            String[] player = data.split(" ");
+                            System.out.println("player 0 "+player[0]);
+                            System.out.println(data);
+                        }
+                    }
+                    else {
+                        myWriter.write(player.getPlayerName()+" "+player.getPlayerClass()+" "+player.getPlayerHP()+" "+player.getPlayerLevel()+" "+player.getPlayerExperiance()+" "+player.getPlayerAttack()+" "+player.getPlayerDefense()); //add weapon,armor
+                        myWriter.close();
+                        readPlayerText.close();
+                    }
+                }
+                catch (FileNotFoundException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }*/
         }
         catch (IOException e){
             e.printStackTrace();
         }
     }
+
     public void adventure(){
         int option;
         boolean validDirection = false;

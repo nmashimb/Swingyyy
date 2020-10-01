@@ -3,10 +3,6 @@ import java.util.Scanner;
 import com.swingy.app.controllers.*;
 import com.swingy.app.views.*;
 import com.swingy.app.models.*;
-/**
- * Hello world!
- *
- */
 
 public class App
 {

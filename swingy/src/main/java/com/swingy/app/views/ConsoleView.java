@@ -48,4 +48,7 @@ public class ConsoleView {
     public void printArgument(String stringToPrint){
         System.out.println("\n"+stringToPrint+"\n");
     }
+    public void printArgumentNoNewLine(String stringToPrint){
+        System.out.println(stringToPrint);
+    }
 }

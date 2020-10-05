@@ -7,7 +7,9 @@ public class GuiView extends JFrame
     private JTextArea startGameOptions;
     private JTextArea playerStatsTextArea;
     private JTextArea gameMap;
+    private JTextArea availablePlayers;
     private JTextField playerNameField;
+    private JTextField HeroOption;
     private JButton createHeroButton;
     private JButton previosHeroButton;
     private JButton selectGiant;
@@ -18,12 +20,17 @@ public class GuiView extends JFrame
     private JButton goEast;
     private JButton goSouth;
     private JButton goWest;
+    private JButton selectHeroButton;
+    private JButton submitNameButton;
+    private JButton fight;
+    private JButton run;
     private JPanel startGamePanel;
     private JPanel stepOnePanel;
     private JPanel stepTwoPanel;
     private JPanel playerStatsPanel;
     private JPanel mapPanel;
-    private JButton submitNameButton;
+    private JPanel previousPlayersPanel;
+    private JPanel fightRunPanel;
     final String[] playerClassArray = {"Giant", "Alph", "Witcher"};
 
     public GuiView(){
@@ -88,6 +95,18 @@ public class GuiView extends JFrame
     public void addGoWestButtonListener(ActionListener listenForGoWestButton){
         goWest.addActionListener(listenForGoWestButton);
     }
+
+    public void addChoosePlayerButtonListener(ActionListener listenForChoosePlayerButton){
+        selectHeroButton.addActionListener(listenForChoosePlayerButton);
+    }
+
+    public void addFightButtonListener(ActionListener listenForFightButton){
+        fight.addActionListener(listenForFightButton);
+    }
+
+    public void addRunButtonListener(ActionListener listenForRunButton){
+        run.addActionListener(listenForRunButton);
+    }
     
     //GETTERS
     public String getPlayerNameField(){
@@ -120,6 +139,18 @@ public class GuiView extends JFrame
 
     public JPanel getMapPanel(){
         return mapPanel;
+    }
+
+    public JPanel getpreviousPlayersPanel(){
+        return previousPlayersPanel;
+    }
+
+    public JTextArea getPreviosPlayers(){
+        return availablePlayers;
+    }
+
+    public String getHeroOption(){
+        return HeroOption.getText();
     }
     //SETTERS
     public void setPlayerStatsTextArea(String playerCurrentStats){
@@ -162,7 +193,8 @@ public class GuiView extends JFrame
     }
 
     public void addPlayerStatsTextAreaToPanel(){
-        stepTwoPanel.setVisible(false);
+        if (stepTwoPanel != null)
+            stepTwoPanel.setVisible(false);
         playerStatsPanel = new JPanel();
         continueGame = new JButton("CONTINUE...");
 
@@ -197,5 +229,38 @@ public class GuiView extends JFrame
         mapPanel.add(goSouth);
         mapPanel.add(goWest);
         this.add(mapPanel);
+    }
+
+    public void displayPlayers(String playersList){
+        startGamePanel.setVisible(false);
+        previousPlayersPanel = new JPanel();
+        availablePlayers = new JTextArea(playersList);
+        availablePlayers.setEditable(false);
+        HeroOption = new JTextField(3); 
+        selectHeroButton = new JButton("Submit");
+
+        previousPlayersPanel.add(availablePlayers);
+        previousPlayersPanel.add(HeroOption);
+        previousPlayersPanel.add(selectHeroButton);
+
+        this.add(previousPlayersPanel);
+    }
+
+    public void fightOrRun(){
+        fightRunPanel = new JPanel();
+        JTextArea fightRunInstr = new JTextArea("Encountered a monster!\n1. Fight\n2. Run");
+        fightRunInstr.setEditable(false);
+        fight = new JButton("Fight");
+        run = new JButton("Run");
+
+        fightRunPanel.add(fightRunInstr);
+        fightRunPanel.add(fight);
+        fightRunPanel.add(run);
+
+        this.add(fightRunPanel);
+    }
+
+    public JPanel getFightRunPanel(){
+        return fightRunPanel;
     }
 }

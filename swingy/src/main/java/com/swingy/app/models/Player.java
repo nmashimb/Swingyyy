@@ -36,7 +36,7 @@ public class Player
         if (level == 0)
             playerExperiance = 0;
         else
-            playerExperiance = playerLevel * 1000 + (playerLevel - 1) * 2 * 450;
+            playerExperiance = level * 1000 + (level - 1) * 2 * 450;
     }
 
     public void setPlayerAttack(int playerAttack){
@@ -101,6 +101,7 @@ public class Player
 
     ////HERO CLASS METHODS
     public void setupGiant(){
+        //setPlayerName(playerName);
         setPlayerClass("Giant");
         setPlayerLevel(1);
         setPlayerHP(10);
@@ -110,6 +111,7 @@ public class Player
     }
 
     public void setupAlph(){
+        //setPlayerName(playerName);
         setPlayerClass("Alph");
         setPlayerLevel(1);
         setPlayerHP(10);
@@ -119,6 +121,7 @@ public class Player
     }
 
     public void setupWitcher(){
+        //setPlayerName(playerName);
         setPlayerClass("Witcher");
         setPlayerLevel(1);
         setPlayerHP(10);

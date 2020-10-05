@@ -15,11 +15,10 @@ public class CalculatorController {
         this.theModel = theModel;
         //the the view, to execute action when button clicked
 
+
        this.theView.addCalculateListener(new CalculateListener());
     }
     
-    //inner class
-    //@Override
     class CalculateListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
             int firstNumber, secondNumber = 0;

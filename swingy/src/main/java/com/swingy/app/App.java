@@ -8,6 +8,8 @@ public class App
 {
     public static void main( String[] args )
     {
+        System.out.println((int)Math.round(Math.random() * 15));
+        
         if (args[0].matches("console")){
             Player player = new Player();
             ConsoleView consoleView = new ConsoleView();

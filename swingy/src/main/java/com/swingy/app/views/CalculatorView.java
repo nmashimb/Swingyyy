@@ -19,7 +19,7 @@ public class CalculatorView extends JFrame {
         calcPanel.add(secondNumber);
         calcPanel.add(calculateButton);
         calcPanel.add(calcSolution);
-
+        
         this.add(calcPanel); //this == JFrame
     }
 

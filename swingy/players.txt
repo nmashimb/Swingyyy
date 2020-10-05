@@ -1,2 +1,4 @@
-1 Giant 10 1 0 10 5
-1 Alph 10 1 0 5 10
+cage witcher 2 1000 7 8 10
+nik alph 2 1000 5 10 0
+nik giant 2 1000 10 5 10
+n alph 2 1000 5 10 10

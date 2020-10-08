@@ -36,7 +36,17 @@ public class ConsoleController
 
     public void playerSetup(){
         consoleView.stepOne();
-        player.setPlayerName(in.nextLine()); //VALIDATE?
+        boolean nameValid = false;
+        while (nameValid == false) {
+            String name = in.nextLine();
+            name = name.trim();
+            if (!name.isEmpty()) {
+                player.setPlayerName(name);
+                nameValid = true;
+            }
+            else
+                consoleView.printArgument("INVALID!! TRY AGAIN!!");
+        }
         while (validClass == false){
             consoleView.stepTwo();
             String selectedPlayerClass = in.nextLine();
@@ -314,6 +324,7 @@ public class ConsoleController
                         player.playerCurrentStats();
                         consoleView.printArgument("\nPRESS ANY KEY TO ADVANCE TO LEVEL "+player.getPlayerLevel()+"\n");
                         in.nextLine();
+                        putVillainsOnMap();
                         map.displayMapAndDirections();
                     }
                 }
@@ -338,6 +349,7 @@ public class ConsoleController
                         player.playerCurrentStats();
                         consoleView.printArgument("\nPRESS ANY KEY TO ADVANCE TO LEVEL "+player.getPlayerLevel()+"\n");
                         in.nextLine();
+                        putVillainsOnMap();
                         map.displayMapAndDirections();
                     }
                 }
@@ -362,6 +374,7 @@ public class ConsoleController
                         player.playerCurrentStats();
                         consoleView.printArgument("\nPRESS ANY KEY TO ADVANCE TO LEVEL "+player.getPlayerLevel()+"\n");
                         in.nextLine();
+                        putVillainsOnMap();
                         map.displayMapAndDirections();
                     }
                 }
@@ -386,6 +399,7 @@ public class ConsoleController
                         player.playerCurrentStats();
                         consoleView.printArgument("\nPRESS ANY KEY TO ADVANCE TO LEVEL "+player.getPlayerLevel()+"\n");
                         in.nextLine();
+                        putVillainsOnMap();
                         map.displayMapAndDirections();
                     }
                 }

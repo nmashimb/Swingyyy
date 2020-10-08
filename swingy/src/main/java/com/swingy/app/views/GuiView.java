@@ -22,15 +22,15 @@ public class GuiView extends JFrame
     private JButton goWest;
     private JButton selectHeroButton;
     private JButton submitNameButton;
-    private JButton fight;
-    private JButton run;
+    private JButton fighting;
+    private JButton running;
     private JPanel startGamePanel;
     private JPanel stepOnePanel;
     private JPanel stepTwoPanel;
     private JPanel playerStatsPanel;
     private JPanel mapPanel;
     private JPanel previousPlayersPanel;
-    private JPanel fightRunPanel;
+    private JPanel fightOrRunPanel;
     final String[] playerClassArray = {"Giant", "Alph", "Witcher"};
 
     public GuiView(){
@@ -101,11 +101,11 @@ public class GuiView extends JFrame
     }
 
     public void addFightButtonListener(ActionListener listenForFightButton){
-        fight.addActionListener(listenForFightButton);
+        fighting.addActionListener(listenForFightButton);
     }
 
     public void addRunButtonListener(ActionListener listenForRunButton){
-        run.addActionListener(listenForRunButton);
+        running.addActionListener(listenForRunButton);
     }
     
     //GETTERS
@@ -151,6 +151,10 @@ public class GuiView extends JFrame
 
     public String getHeroOption(){
         return HeroOption.getText();
+    }
+
+    public JPanel getFightOrRunPanel(){
+        return fightOrRunPanel;
     }
     //SETTERS
     public void setPlayerStatsTextArea(String playerCurrentStats){
@@ -206,6 +210,7 @@ public class GuiView extends JFrame
     public void showMapAndDirectionsGui(String map[][], int dimensions){
         mapPanel = new JPanel();
         gameMap = new JTextArea();
+        gameMap.setEditable(false);
         int x = 0;
         int y;
 
@@ -246,21 +251,28 @@ public class GuiView extends JFrame
         this.add(previousPlayersPanel);
     }
 
-    public void fightOrRun(){
-        fightRunPanel = new JPanel();
+    public void addFightOrRunToPanel(){
+        fightOrRunPanel = new JPanel();
         JTextArea fightRunInstr = new JTextArea("Encountered a monster!\n1. Fight\n2. Run");
         fightRunInstr.setEditable(false);
-        fight = new JButton("Fight");
-        run = new JButton("Run");
-
-        fightRunPanel.add(fightRunInstr);
-        fightRunPanel.add(fight);
-        fightRunPanel.add(run);
-
-        this.add(fightRunPanel);
+        JButton fighting = new JButton("Fight");
+        JButton running = new JButton("Run");
+        this.fighting = fighting;
+        this.running = running;
+ 
+        fightOrRunPanel.add(fightRunInstr);
+        fightOrRunPanel.add(fighting);
+        fightOrRunPanel.add(running);
+        this.add(fightOrRunPanel);
     }
 
-    public JPanel getFightRunPanel(){
-        return fightRunPanel;
+    public void gameOver(){
+        JPanel gameOverPanel = new JPanel();
+        JTextArea msg = new JTextArea("GAME OVER!");
+        msg.setEditable(false);
+
+        gameOverPanel.add(msg);
+        
+        this.add(gameOverPanel);
     }
 }

@@ -14,6 +14,8 @@ public class Player
     private int playerDefense;
     private int xPosition;
     private int yPosition;
+    private int prevXpos;
+    private int prevYpos;
 
     ///SETTERS
     public void setPlayerHP(int playerHP){
@@ -58,7 +60,16 @@ public class Player
     public void setPlayerYPos(int y){
         yPosition = y;
     }
-    ////GETTERS
+
+    public void setPreviousXposition(int x){
+        prevXpos = x;
+    }
+
+    public void setPreviousYposition(int y){
+        prevYpos = y;
+    }
+
+    ////GETTERS    
     public int getPlayerHP(){
         return this.playerHP;
     }
@@ -97,6 +108,14 @@ public class Player
 
     public int getPlayerYPos(){
         return yPosition;
+    }
+
+    public int getPreviousXposition(){
+        return prevYpos;
+    }
+
+    public int getPreviousYposition(){
+        return prevYpos;
     }
 
     ////HERO CLASS METHODS

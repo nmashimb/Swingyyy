@@ -172,7 +172,6 @@ public class GuiController
                             player.setPlayerAttack(Integer.parseInt(playersList[i - 1].split(" ")[5]));
                             player.setPlayerDefense(Integer.parseInt(playersList[i - 1].split(" ")[6]));
                             player.setPlayerHP(Integer.parseInt(playersList[i - 1].split(" ")[7]));
-
                             if (playerClass.matches("giant")){
                                 player.setPlayerClass(playerClass);
                             }
@@ -271,23 +270,84 @@ public class GuiController
         }
     }
 
-    public void encounteredVillain(int previousX, int previousY){
-        if (map.spotOccuppied(player.getPlayerXPos(), player.getPlayerYPos())){
+    public void encounteredVillain(){
             guiView.getMapPanel().setVisible(false);
-            guiView.fightOrRun();
-            //guiView.getFightRunPanel().setVisible(true);
+            guiView.addFightOrRunToPanel();
             guiView.addFightButtonListener(new FightButtonListenr());
             guiView.addRunButtonListener(new RunButtonListener());
-            System.out.println("Eencountered a monster!\n1. Fight\n2. Run");
+            System.out.println("Encountered a monster!\n1. Fight\n2. Run");
+  
+    }
+
+    public boolean fightVillain(){
+        int villainHP = player.getPlayerHP() - 5;
+        while (villainHP > 0){
+            int attacker = ((int)Math.round(Math.random() * (1)));
+            
+            if (attacker == 0){ //villain attacking
+                int attackerLevel = ((int)Math.round(Math.random() * (2)));
+                if (attackerLevel == 0){
+                    player.setPlayerHP(player.getPlayerHP() - player.getPlayerLevel());
+                }
+                else if (attackerLevel == 1){
+                    player.setPlayerHP(player.getPlayerHP() - (player.getPlayerLevel() + 2));
+                }
+                else if (attackerLevel == 2){
+                    player.setPlayerHP(player.getPlayerHP() - (player.getPlayerLevel() + 3));
+                }
+            }
+            else if (attacker == 1){ //player attacking
+                int attackerLevel = ((int)Math.round(Math.random() * (2)));
+                if (attackerLevel == 0){
+                    villainHP = villainHP - player.getPlayerLevel();
+                }
+                else if (attackerLevel == 1){
+                    villainHP = villainHP - (player.getPlayerLevel() + 1);
+                }
+                else if (attackerLevel == 2){
+                    villainHP = villainHP - (player.getPlayerLevel() + 2);
+                }
+            }
         }
-                
+        if (player.getPlayerHP() > 0){
+            //increase player stats
+            int gift = ((int)Math.round(Math.random() * (2)));
+            int villainLevel = ((int)Math.round(Math.random() * (1)));
+            if (gift == 0 && villainLevel == 1){
+                player.setPlayerAttack(player.getPlayerAttack() + 2);
+            }
+            else if (gift == 1 && villainLevel == 1){
+                player.setPlayerDefense(player.getPlayerDefense() + 2);
+            }
+            else if (gift == 2 && villainLevel == 1){
+                player.setPlayerHP(player.getPlayerHP() + 5);
+            }
+            return true;
+        }
+        else
+            return false;
     }
 
     class FightButtonListenr implements ActionListener 
     {
         public void actionPerformed(ActionEvent e){
             System.out.println("fight");
+            map.placePlayerOnMap(player.getPlayerXPos(), player.getPlayerYPos());
+            if (fightVillain()){
+                guiView.getFightOrRunPanel().setVisible(false);
+                guiView.showMapAndDirectionsGui(map.getMap(), map.getDimensions());
         
+                guiView.addGoNorthButtonListener(new GoNorthButtonListener());
+                guiView.addGoEastButtonListener(new GoEastButtonListener());
+                guiView.addGoSouthButtonListener(new GoSouthButtonListener());
+                guiView.addGoWestButtonListener(new GoWestButtonListener());
+            }
+            else {
+                guiView.getFightOrRunPanel().setVisible(false);
+                guiView.getMapPanel().setVisible(false);
+                guiView.gameOver();
+                System.out.println("Game Over from fight! "+player.getPlayerHP());
+            }
         }
     }
 
@@ -295,27 +355,71 @@ public class GuiController
     {
         public void actionPerformed(ActionEvent e){
             System.out.println("run");
-           
+            boolean oddValid = false;
+            int odds = 0;
+            while (oddValid == false){
+                odds = ((int)Math.round(Math.random() * (2)));
+                if (odds == 1)
+                    oddValid = true;
+                else if (odds == 2)
+                    oddValid = true;
+            }
+            if (odds == 1){ //run
+                player.setPlayerXPos(player.getPreviousXposition());
+                player.setPlayerYPos(player.getPreviousYposition());
+                map.placePlayerOnMap(player.getPreviousXposition(), player.getPreviousYposition());
+                guiView.getFightOrRunPanel().setVisible(false);
+                guiView.showMapAndDirectionsGui(map.getMap(), map.getDimensions());
+        
+                guiView.addGoNorthButtonListener(new GoNorthButtonListener());
+                guiView.addGoEastButtonListener(new GoEastButtonListener());
+                guiView.addGoSouthButtonListener(new GoSouthButtonListener());
+                guiView.addGoWestButtonListener(new GoWestButtonListener());
+                System.out.println("ran!");
+            }
+            else { ///fight
+                map.placePlayerOnMap(player.getPlayerXPos(), player.getPlayerYPos());
+                System.out.println("no choice, fight!");
+                if (fightVillain()){
+                    guiView.getFightOrRunPanel().setVisible(false);
+                    guiView.showMapAndDirectionsGui(map.getMap(), map.getDimensions());
+            
+                    guiView.addGoNorthButtonListener(new GoNorthButtonListener());
+                    guiView.addGoEastButtonListener(new GoEastButtonListener());
+                    guiView.addGoSouthButtonListener(new GoSouthButtonListener());
+                    guiView.addGoWestButtonListener(new GoWestButtonListener());
+                }
+                else {
+                    guiView.getFightOrRunPanel().setVisible(false);
+                    guiView.getMapPanel().setVisible(false);
+                    guiView.gameOver();
+                    System.out.println("Game Over from run! "+player.getPlayerHP());
+                }
+            }
         }
     } 
 
     class GoNorthButtonListener implements ActionListener 
     {
         public void actionPerformed(ActionEvent e){
-            int previousX = player.getPlayerXPos();
-            int previousY = player.getPlayerYPos();
+            player.setPreviousXposition(player.getPlayerXPos());
+            player.setPreviousYposition(player.getPlayerYPos());
+
             if (player.getPlayerXPos() != 0){
                 map.removePlayerOnMap(player.getPlayerXPos(), player.getPlayerYPos());
                 player.setPlayerXPos(player.getPlayerXPos() - 1);
-                map.placePlayerOnMap(player.getPlayerXPos(), player.getPlayerYPos());
-                //encounteredVillain(previousX, previousY);
-                guiView.getMapPanel().setVisible(false);
-                guiView.showMapAndDirectionsGui(map.getMap(), map.getDimensions());
-
-                guiView.addGoNorthButtonListener(new GoNorthButtonListener());
-                guiView.addGoEastButtonListener(new GoEastButtonListener());
-                guiView.addGoSouthButtonListener(new GoSouthButtonListener());
-                guiView.addGoWestButtonListener(new GoWestButtonListener());
+                if (map.spotOccuppied(player.getPlayerXPos(), player.getPlayerYPos()))
+                    encounteredVillain();
+                else{
+                    map.placePlayerOnMap(player.getPlayerXPos(), player.getPlayerYPos());
+                    guiView.getMapPanel().setVisible(false);
+                    guiView.showMapAndDirectionsGui(map.getMap(), map.getDimensions());
+                
+                    guiView.addGoNorthButtonListener(new GoNorthButtonListener());
+                    guiView.addGoEastButtonListener(new GoEastButtonListener());
+                    guiView.addGoSouthButtonListener(new GoSouthButtonListener());
+                    guiView.addGoWestButtonListener(new GoWestButtonListener());
+                } 
             }
             else {
                 player.setPlayerExperiance(player.getPlayerLevel());
@@ -339,6 +443,9 @@ public class GuiController
     class GoEastButtonListener implements ActionListener 
     {
         public void actionPerformed(ActionEvent e){
+            player.setPreviousXposition(player.getPlayerXPos());
+            player.setPreviousYposition(player.getPlayerYPos());
+
             if (player.getPlayerYPos() != map.getDimensions() - 1){
                 map.removePlayerOnMap(player.getPlayerXPos(), player.getPlayerYPos());
                 player.setPlayerYPos(player.getPlayerYPos() + 1);
@@ -373,6 +480,8 @@ public class GuiController
     class GoSouthButtonListener implements ActionListener 
     {
         public void actionPerformed(ActionEvent e){
+            player.setPreviousXposition(player.getPlayerXPos());
+            player.setPreviousYposition(player.getPlayerYPos());
             if (player.getPlayerXPos() != map.getDimensions() - 1){
                 map.removePlayerOnMap(player.getPlayerXPos(), player.getPlayerYPos());
                 player.setPlayerXPos(player.getPlayerXPos() + 1);
@@ -407,6 +516,9 @@ public class GuiController
     class GoWestButtonListener implements ActionListener 
     {
         public void actionPerformed(ActionEvent e){
+            player.setPreviousXposition(player.getPlayerXPos());
+            player.setPreviousYposition(player.getPlayerYPos());
+            
             if (player.getPlayerYPos() != 0){
                 map.removePlayerOnMap(player.getPlayerXPos(), player.getPlayerYPos());
                 player.setPlayerYPos(player.getPlayerYPos() - 1);
